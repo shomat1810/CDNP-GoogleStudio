@@ -25,6 +25,7 @@ export const DonationBanner: React.FC<DonationBannerProps> = ({ onOpenDonate }) 
           </p>
 
           {/* Quick preset donation buttons */}
+          /*
           <div className="flex flex-wrap justify-center items-center gap-2.5 mb-8">
             {[15, 35, 75, 150].map((amt) => (
               <button
@@ -40,6 +41,7 @@ export const DonationBanner: React.FC<DonationBannerProps> = ({ onOpenDonate }) 
               </button>
             ))}
           </div>
+          */
 
           {/* Prominent CTA / Stripe Buy Button */}
           <div className="flex flex-col items-center justify-center gap-4 bg-slate-900/60 p-6 rounded-xl border border-slate-700/60 max-w-md mx-auto">
