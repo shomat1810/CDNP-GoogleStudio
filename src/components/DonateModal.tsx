@@ -78,11 +78,11 @@ export const DonateModal: React.FC<DonateModalProps> = ({
             </div>
           </div>
 
-          {/* Tax & Governance Guarantees */}
+          {/* Governance Guarantees */}
           <div className="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-600">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-              <span>Instant tax receipt emailed upon checkout</span>
+              <span>Instant receipt emailed upon checkout</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />

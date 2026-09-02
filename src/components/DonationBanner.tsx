@@ -21,7 +21,7 @@ export const DonationBanner: React.FC<DonationBannerProps> = ({ onOpenDonate }) 
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base mt-4 mb-8 max-w-2xl mx-auto leading-relaxed">
-            CDNP operates strictly as a public charity. We never charge victims a single penny. Your tax-deductible contribution directly funds emergency first-aid toolkits, volunteer responder training, and community assistance.
+            CDNP operates strictly as a public charity. We never charge victims a single penny. Your contribution directly funds emergency first-aid toolkits, volunteer responder training, and community assistance.
           </p>
 
           {/* Quick preset donation buttons */}
@@ -60,7 +60,7 @@ export const DonationBanner: React.FC<DonationBannerProps> = ({ onOpenDonate }) 
               onClick={() => onOpenDonate()}
               className="text-xs text-slate-400 hover:text-slate-200 underline transition-colors cursor-pointer flex items-center gap-1"
             >
-              <span>View tax-deductible contribution details</span>
+              <span>View contribution details</span>
               <ArrowRight className="w-3 h-3" />
             </button>
           </div>
@@ -69,7 +69,7 @@ export const DonationBanner: React.FC<DonationBannerProps> = ({ onOpenDonate }) 
           <div className="mt-8 pt-6 border-t border-slate-700/80 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400">
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Tax-deductible receipt provided</span>
+              <span>Receipt provided</span>
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
