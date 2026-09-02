@@ -26,7 +26,7 @@ export const AboutSection: React.FC = () => {
             </p>
 
             <p className="text-slate-600 text-base mt-3 leading-relaxed">
-              We operate exclusively as a 501(c)(3) charitable defense organization funded by philanthropic grants and community donations. Our network brings together certified incident responders, ethical hackers, privacy attorneys, and empathetic crisis volunteers.
+              We operate exclusively as a charitable defense organization funded by philanthropic grants and community donations. Our network brings together certified incident responders, ethical hackers, privacy attorneys, and empathetic crisis volunteers.
             </p>
 
             {/* Core Non-Profit Pillars */}
@@ -93,7 +93,7 @@ export const AboutSection: React.FC = () => {
               <div className="space-y-3 border-t border-slate-800 pt-5 text-xs text-slate-300">
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Legal Status:</span>
-                  <span className="font-semibold text-emerald-400">501(c)(3) Public Charity</span>
+                  <span className="font-semibold text-emerald-400"> Public Charity</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Audited Financials:</span>

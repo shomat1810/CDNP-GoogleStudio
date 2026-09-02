@@ -29,7 +29,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
                 {isPrivacy ? 'CDNP Non-Profit Privacy Charter' : 'Terms of Service & Public Defense Agreement'}
               </h2>
               <span className="text-xs text-blue-300 font-medium">
-                Operated strictly as a 501(c)(3) public benefit non-profit
+                Operated strictly as a public benefit non-profit
               </span>
             </div>
           </div>
