@@ -24,8 +24,8 @@ export const DonationBanner: React.FC<DonationBannerProps> = ({ onOpenDonate }) 
             CDNP operates strictly as a public charity. We never charge victims a single penny. Your contribution directly funds emergency first-aid toolkits, volunteer responder training, and community assistance.
           </p>
 
-          {/* Quick preset donation buttons */}
-          /*
+          {/* Quick preset donation buttons 
+          
           <div className="flex flex-wrap justify-center items-center gap-2.5 mb-8">
             {[15, 35, 75, 150].map((amt) => (
               <button
@@ -41,12 +41,13 @@ export const DonationBanner: React.FC<DonationBannerProps> = ({ onOpenDonate }) 
               </button>
             ))}
           </div>
-          */
+          */}
+          
 
           {/* Prominent CTA / Stripe Buy Button */}
           <div className="flex flex-col items-center justify-center gap-4 bg-slate-900/60 p-6 rounded-xl border border-slate-700/60 max-w-md mx-auto">
             <div className="text-xs font-semibold uppercase tracking-wider text-blue-300">
-              Instant Non-Profit Contribution
+              You are a Saviour!
             </div>
             
             <div className="flex justify-center items-center min-h-[44px]">
