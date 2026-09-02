@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface CaseStory {
   id: string;
   title: string;
@@ -37,3 +39,19 @@ export interface SelfHelpGuide {
 }
 
 export type ModalType = 'none' | 'getHelp' | 'donate' | 'reportAbuse' | 'privacy' | 'terms' | 'guideDetail';
+
+declare global {
+  namespace React.JSX {
+    interface IntrinsicElements {
+      'stripe-buy-button': {
+        'buy-button-id'?: string;
+        'publishable-key'?: string;
+        class?: string;
+        className?: string;
+        id?: string;
+        children?: any;
+      };
+    }
+  }
+}
+

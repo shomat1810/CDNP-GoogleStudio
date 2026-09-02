@@ -41,16 +41,27 @@ export const DonationBanner: React.FC<DonationBannerProps> = ({ onOpenDonate }) 
             ))}
           </div>
 
-          {/* Prominent CTA button */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          {/* Prominent CTA / Stripe Buy Button */}
+          <div className="flex flex-col items-center justify-center gap-4 bg-slate-900/60 p-6 rounded-xl border border-slate-700/60 max-w-md mx-auto">
+            <div className="text-xs font-semibold uppercase tracking-wider text-blue-300">
+              Instant Non-Profit Contribution
+            </div>
+            
+            <div className="flex justify-center items-center min-h-[44px]">
+              <stripe-buy-button
+                buy-button-id="buy_btn_1U7wKFRjQhsa0nsTKv2ZJRVc"
+                publishable-key="pk_live_51U7vocRjQhsa0nsTUemhsHII0N1biqblD5YR9KYVXdoUlsR2NwpJPVL1qq6CbFDkxvsWNHtgvnlWXm2xHnzwC7nR00LxTWiMSq"
+              >
+              </stripe-buy-button>
+            </div>
+
             <button
               id="banner-donate-now-btn"
               onClick={() => onOpenDonate()}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 rounded-lg shadow-md transition-colors cursor-pointer"
+              className="text-xs text-slate-400 hover:text-slate-200 underline transition-colors cursor-pointer flex items-center gap-1"
             >
-              <Heart className="w-4 h-4 text-white fill-white" />
-              <span>Make a Tax-Deductible Gift</span>
-              <ArrowRight className="w-4 h-4 text-blue-200 ml-0.5" />
+              <span>View tax-deductible contribution details</span>
+              <ArrowRight className="w-3 h-3" />
             </button>
           </div>
 
