@@ -1,0 +1,7 @@
+{
+  "name": "CDNP - Cyber Defense Non-Profit",
+  "description": "Free, empathetic digital first-aid, account recovery guidance, and security advocacy operated as a true non-profit.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
