@@ -84,14 +84,14 @@ export const SELF_HELP_GUIDES: SelfHelpGuide[] = [
       },
       {
         number: 2,
-        title: 'Place a FREE Credit Freeze with all 3 bureaus',
-        detail: 'Freezing your credit prevents anyone from taking out loans in your name. By law in the US, credit freezes are completely free at Experian, Equifax, and TransUnion.',
+        title: 'Secure your Credit',
+        detail: 'Apply for a credit ban to stop someone from opening lines of credit in your name https://www.idcare.org/.',
         warning: 'Never pay for a credit lock when the federal credit freeze is 100% free by law.'
       },
       {
         number: 3,
-        title: 'File an identity theft report with the FTC',
-        detail: 'Visit IdentityTheft.gov to file an official affidavit. This report serves as legal proof to dispute fraudulent debts with collectors.',
+        title: 'File an identity theft report',
+        detail: 'Visit https://www.cyber.gov.au/ to file an official report. This report serves as legal proof to dispute fraudulent debts with collectors.',
       }
     ]
   },
@@ -114,8 +114,8 @@ export const SELF_HELP_GUIDES: SelfHelpGuide[] = [
       },
       {
         number: 3,
-        title: 'Check NoMoreRansom.org for free decryptors',
-        detail: 'The No More Ransom project (supported by Europol and law enforcement) contains free decryption tools for hundreds of known ransomware variants.',
+        title: 'Report the incident',
+        detail: 'Report cybercrimes, security incidents and abuse through https://www.cyber.gov.au/.',
       }
     ]
   }

@@ -54,7 +54,7 @@ export const DonateModal: React.FC<DonateModalProps> = ({
               <span> Non-Profit Contribution</span>
             </div>
             <p className="text-slate-600">
-              Your gift funds emergency incident response, digital recovery toolkits, and victim advocacy for seniors, small organizations, and vulnerable community members.
+              Your support keeps 'Cyber Defence Non Profit' alive and moving forward. Thank you for believing in what we do and helping us make a real impact!
             </p>
           </div>
 
@@ -66,8 +66,8 @@ export const DonateModal: React.FC<DonateModalProps> = ({
             
             <div className="flex justify-center items-center py-2 min-h-[48px]">
               <stripe-buy-button
-                buy-button-id="buy_btn_1U7wKFRjQhsa0nsTKv2ZJRVc"
-                publishable-key="pk_live_51U7vocRjQhsa0nsTUemhsHII0N1biqblD5YR9KYVXdoUlsR2NwpJPVL1qq6CbFDkxvsWNHtgvnlWXm2xHnzwC7nR00LxTWiMSq"
+                buy-button-id="buy_btn_1UBxvgDtAx4QQ9B2C1Wzd96x"
+                publishable-key="pk_live_51UBxiCDtAx4QQ9B2ac1Zn5PprXNJ45NrIlyjEZh6h7WNM8HqNKinV1w2I6EfkjlJpPSrynPK8t9Ljl7d1lT1MRON00YfOg6yio"
               >
               </stripe-buy-button>
             </div>
@@ -82,11 +82,11 @@ export const DonateModal: React.FC<DonateModalProps> = ({
           <div className="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-600">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-              <span>Instant receipt emailed upon checkout</span>
+              <span>Your support turns digital disasters into stories of recovery</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-              <span>Strict non-profit governance & zero corporate advertising</span>
+              <span>True non-profit organization</span>
             </div>
           </div>
 

@@ -41,9 +41,9 @@ export const Hero: React.FC<HeroProps> = ({
           {/* Trust Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/90 border border-blue-500/40 text-blue-300 text-xs sm:text-sm font-medium mb-5 shadow-sm">
             <span className="flex h-2 w-2 rounded-full bg-blue-400" />
-            <span> Non-Profit Public Defense</span>
-            <span className="text-slate-500">•</span>
-            <span className="text-slate-200">Zero Cost • Zero Judgment</span>
+            <span> Non-Profit </span>
+            <span className="text-slate-500"></span>
+            <span className="text-slate-200">• Zero Cost • Zero Judgment</span>
           </div>
 
           {/* Headline - Exact required string */}

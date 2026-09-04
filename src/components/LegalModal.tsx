@@ -80,7 +80,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
 
               <h3 className="text-base font-bold text-slate-900 mt-2">3. Emergency Situations</h3>
               <p>
-                If you are in immediate physical danger, experiencing domestic extortion, or immediate violence, please contact your local law enforcement emergency services (e.g., 911 in the United States) immediately.
+                If you are in immediate physical danger, experiencing domestic extortion, or immediate violence, please contact your local law enforcement emergency services (e.g., 000 for Australia; 911 for United States, etc) immediately.
               </p>
             </>
           )}

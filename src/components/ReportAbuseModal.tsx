@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, AlertTriangle, CheckCircle2, Send } from 'lucide-react';
+import { X, AlertTriangle, CheckCircle2, Send, Loader2, AlertCircle } from 'lucide-react';
 
 interface ReportAbuseModalProps {
   isOpen: boolean;
@@ -10,17 +10,61 @@ export const ReportAbuseModal: React.FC<ReportAbuseModalProps> = ({ isOpen, onCl
   const [abuseType, setAbuseType] = useState('Phishing Link / Fake Login Page');
   const [targetUrl, setTargetUrl] = useState('');
   const [details, setDetails] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+
+    // Honeypot check: reject bots silently
+    if (honeypot) {
+      setIsSubmitted(true);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/1cd30f193bf505df6f6cf2bce28e9f78', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `[CDNP Threat Report] ${abuseType}`,
+          _honey: honeypot,
+          _captcha: 'true',
+          _template: 'table',
+          'Threat Category': abuseType,
+          'Suspicious Indicator / URL / Handle': targetUrl,
+          'Context & Evidence': details || 'No additional text provided',
+        }),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (response.ok || (data && (data.success === 'true' || data.success === true))) {
+        setIsSubmitted(true);
+      } else {
+        throw new Error(data?.message || 'Submission failed. Please try again.');
+      }
+    } catch (err: any) {
+      console.error('FormSubmit threat report error:', err);
+      setSubmitError(err.message || 'Unable to deliver threat report. Please verify connection.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleClose = () => {
     setIsSubmitted(false);
+    setSubmitError(null);
     onClose();
   };
 
@@ -77,6 +121,21 @@ export const ReportAbuseModal: React.FC<ReportAbuseModalProps> = ({ isOpen, onCl
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Honeypot field to block automated spam bots */}
+              <input
+                type="text"
+                name="_honey"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                style={{ display: 'none' }}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
+
+              {/* Enable default FormSubmit reCAPTCHA */}
+              <input type="hidden" name="_captcha" value="true" />
+
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Threat Category:
@@ -121,14 +180,34 @@ export const ReportAbuseModal: React.FC<ReportAbuseModalProps> = ({ isOpen, onCl
                 />
               </div>
 
+              {submitError && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-md flex items-start gap-2 text-xs text-red-800">
+                  <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold">Notice: </span>
+                    <span>{submitError}</span>
+                  </div>
+                </div>
+              )}
+
               <div className="pt-2">
                 <button
                   id="btn-submit-abuse-report"
                   type="submit"
-                  className="w-full py-2.5 px-6 bg-blue-700 hover:bg-blue-800 text-white font-semibold text-sm rounded-md shadow-sm transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full py-2.5 px-6 bg-blue-700 hover:bg-blue-800 disabled:bg-blue-400 text-white font-semibold text-sm rounded-md shadow-sm transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Submit Threat Report</span>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Transmitting Threat Intelligence...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Submit Threat Report</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>

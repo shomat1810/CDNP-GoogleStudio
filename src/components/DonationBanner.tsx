@@ -52,8 +52,8 @@ export const DonationBanner: React.FC<DonationBannerProps> = ({ onOpenDonate }) 
             
             <div className="flex justify-center items-center min-h-[44px]">
               <stripe-buy-button
-                buy-button-id="buy_btn_1U7wKFRjQhsa0nsTKv2ZJRVc"
-                publishable-key="pk_live_51U7vocRjQhsa0nsTUemhsHII0N1biqblD5YR9KYVXdoUlsR2NwpJPVL1qq6CbFDkxvsWNHtgvnlWXm2xHnzwC7nR00LxTWiMSq"
+                buy-button-id="buy_btn_1UBxvgDtAx4QQ9B2C1Wzd96x"
+                publishable-key="pk_live_51UBxiCDtAx4QQ9B2ac1Zn5PprXNJ45NrIlyjEZh6h7WNM8HqNKinV1w2I6EfkjlJpPSrynPK8t9Ljl7d1lT1MRON00YfOg6yio"
               >
               </stripe-buy-button>
             </div>
@@ -74,10 +74,7 @@ export const DonationBanner: React.FC<DonationBannerProps> = ({ onOpenDonate }) 
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
               <span>Receipt provided</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Transparent non-profit governance</span>
-            </div>
+            
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
               <span>Secure 256-bit encrypted checkout</span>

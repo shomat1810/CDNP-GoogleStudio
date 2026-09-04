@@ -7,7 +7,9 @@ import {
   ArrowRight, 
   ArrowLeft,
   Lock,
-  Send
+  Send,
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
 
 interface EmergencyHelpModalProps {
@@ -28,18 +30,65 @@ export const EmergencyHelpModal: React.FC<EmergencyHelpModalProps> = ({
   const [contactValue, setContactValue] = useState('');
   const [victimAlias, setVictimAlias] = useState('');
   const [description, setDescription] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+
+    // Honeypot check: If filled by automated bot, fail silently
+    if (honeypot) {
+      setIsSubmitted(true);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/1cd30f193bf505df6f6cf2bce28e9f78', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `[CDNP Emergency Help] ${urgencyLevel.toUpperCase()}: ${incidentType} - ${victimAlias || 'Anonymous'}`,
+          _honey: honeypot,
+          _captcha: 'true',
+          _template: 'table',
+          'Incident Type': incidentType,
+          'Urgency Level': urgencyLevel,
+          'Preferred Contact Method': contactMethod,
+          'Safe Contact Information': contactValue,
+          'Victim Alias / Name': victimAlias || 'Anonymous',
+          'Incident Description': description,
+        }),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (response.ok || (data && (data.success === 'true' || data.success === true))) {
+        setIsSubmitted(true);
+      } else {
+        throw new Error(data?.message || 'Submission failed. Please try again.');
+      }
+    } catch (err: any) {
+      console.error('FormSubmit delivery error:', err);
+      setSubmitError(err.message || 'Unable to deliver report. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const resetAndClose = () => {
     setIsSubmitted(false);
     setStep(1);
+    setSubmitError(null);
     onClose();
   };
 
@@ -86,7 +135,7 @@ export const EmergencyHelpModal: React.FC<EmergencyHelpModalProps> = ({
                 Help Request Received Safely
               </h3>
               <p className="text-sm text-slate-600 mt-2 max-w-md mx-auto leading-relaxed">
-                A CDNP volunteer security specialist has been assigned to your case queue. Because we are an active non-profit, our triage response is prioritized by incident urgency.
+                Your incident details have been successfully transmitted to our responders' mailbox. A volunteer security specialist will review your priority triage queue immediately.
               </p>
 
               <div className="mt-6 p-4 bg-slate-50 border border-slate-200 rounded-lg text-left max-w-md mx-auto space-y-2">
@@ -94,7 +143,7 @@ export const EmergencyHelpModal: React.FC<EmergencyHelpModalProps> = ({
                   Immediate Security Reminder:
                 </div>
                 <p className="text-xs text-slate-600">
-                  • <strong>Do not</strong> communicate with attackers demanding ransom or cryptocurrency.
+                  • <strong>For immediate physical danger or extortion, call your local law enforcement emergency number (e.g., 000 in Australia, 911 in the US) immediately.</strong>
                 </p>
                 <p className="text-xs text-slate-600">
                   • <strong>Do not</strong> share 2FA codes with anyone claiming to be tech support.
@@ -238,7 +287,7 @@ export const EmergencyHelpModal: React.FC<EmergencyHelpModalProps> = ({
                         1
                       </div>
                       <div>
-                        <strong>Disconnect from the internet if ransomware/malware is suspected:</strong> Unplug Ethernet cables and turn off Wi-Fi.
+                        <strong>If you are in immediate physical danger or facing violence, call your local law enforcement emergency services (e.g., 000 or 911) immediately.</strong>
                       </div>
                     </div>
 
@@ -247,7 +296,7 @@ export const EmergencyHelpModal: React.FC<EmergencyHelpModalProps> = ({
                         2
                       </div>
                       <div>
-                        <strong>Never send money to ransom demands:</strong> Criminals almost never restore accounts and will continue demanding more funds.
+                        <strong>Disconnect from the internet if ransomware/malware is suspected:</strong> Unplug Ethernet cables and turn off Wi-Fi.
                       </div>
                     </div>
 
@@ -286,6 +335,21 @@ export const EmergencyHelpModal: React.FC<EmergencyHelpModalProps> = ({
               {/* Step 3: Contact Form */}
               {step === 3 && (
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Honeypot field to block spam bots */}
+                  <input
+                    type="text"
+                    name="_honey"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    style={{ display: 'none' }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
+
+                  {/* Enable default FormSubmit reCAPTCHA */}
+                  <input type="hidden" name="_captcha" value="true" />
+
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">
                       Preferred Name or Anonymous Alias:
@@ -358,6 +422,16 @@ export const EmergencyHelpModal: React.FC<EmergencyHelpModalProps> = ({
                     <span>Your submission is encrypted and reviewed exclusively by verified CDNP non-profit responders.</span>
                   </div>
 
+                  {submitError && (
+                    <div className="p-3 bg-red-50 border border-red-200 rounded-md flex items-start gap-2 text-xs text-red-800">
+                      <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <span className="font-semibold">Submission notice: </span>
+                        <span>{submitError}</span>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="flex items-center justify-between pt-2">
                     <button
                       type="button"
@@ -371,10 +445,20 @@ export const EmergencyHelpModal: React.FC<EmergencyHelpModalProps> = ({
                     <button
                       id="btn-submit-help-request"
                       type="submit"
-                      className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-700 hover:bg-blue-800 text-white text-xs sm:text-sm font-semibold rounded-md shadow-sm transition-colors cursor-pointer"
+                      disabled={isSubmitting}
+                      className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-700 hover:bg-blue-800 disabled:bg-blue-400 text-white text-xs sm:text-sm font-semibold rounded-md shadow-sm transition-colors cursor-pointer disabled:cursor-not-allowed"
                     >
-                      <Send className="w-4 h-4" />
-                      <span>Submit Free Assistance Request</span>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>Delivering to Inbox...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          <span>Submit Free Assistance Request</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </form>

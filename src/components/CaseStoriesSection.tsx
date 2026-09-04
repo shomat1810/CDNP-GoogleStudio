@@ -169,7 +169,7 @@ export const CaseStoriesSection: React.FC<CaseStoriesSectionProps> = ({ onOpenGe
             <div className="text-xs font-medium text-slate-600 mt-1">Cost to Victims Always</div>
           </div>
           <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center">
-            <div className="text-2xl font-black text-blue-900">4,800+</div>
+            <div className="text-2xl font-black text-blue-900">800+</div>
             <div className="text-xs font-medium text-slate-600 mt-1">Cases Guided & Triage Completed</div>
           </div>
           <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center">

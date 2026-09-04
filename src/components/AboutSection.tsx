@@ -95,10 +95,7 @@ export const AboutSection: React.FC = () => {
                   <span className="text-slate-400">Legal Status:</span>
                   <span className="font-semibold text-emerald-400"> Public Charity</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-400">Audited Financials:</span>
-                  <span className="font-semibold text-slate-200">Published Annually</span>
-                </div>
+
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Victim Cost:</span>
                   <span className="font-semibold text-blue-400">Always $0.00 Guaranteed</span>
