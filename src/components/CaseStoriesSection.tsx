@@ -18,7 +18,7 @@ const CASE_STORIES: CaseStory[] = [
     id: 'case-1',
     title: 'Recovering a Hijacked Small Business Instagram & Primary Email',
     category: 'Account Recovery',
-    victimAlias: 'Elena R., Artisan Bakery Owner',
+    victimAlias: 'Elena R., Bakery Owner',
     timeframe: 'Resolved in 14 hours',
     situation: 'Elena received a deceptive DM posing as copyright infringement. After entering credentials on a spoofed portal, attackers seized her 45,000-follower business profile, changed the 2FA phone number, and demanded $1,500 in crypto ransom.',
     cdnpAction: 'CDNP volunteer specialists intervened immediately: isolated the primary domain mailbox, halted DNS records, navigated Meta’s verified partner escalation route with identity affidavits, and nullified the extortion attempt.',

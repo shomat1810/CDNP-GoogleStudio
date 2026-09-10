@@ -21,7 +21,7 @@ export const DonationBanner: React.FC<DonationBannerProps> = ({ onOpenDonate }) 
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base mt-4 mb-8 max-w-2xl mx-auto leading-relaxed">
-            CDNP operates strictly as a public charity. We never charge victims a single penny. Your contribution directly funds emergency first-aid toolkits, volunteer responder training, and community assistance.
+            CDNP operates strictly as a non-profit organization. We never charge victims a single penny. Your contribution directly funds emergency first-aid toolkits, volunteer responder training, and community assistance.
           </p>
 
           {/* Quick preset donation buttons 

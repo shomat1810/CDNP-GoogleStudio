@@ -66,7 +66,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
           ) : (
             <>
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 text-xs font-semibold">
-                🤝 Non-Profit Service Commitment: All guidance is provided 100% free of charge as a charitable community service.
+                🤝 Non-Profit Service Commitment: All guidance is provided 100% free of charge as a non-profit community service.
               </div>
               <h3 className="text-base font-bold text-slate-900 mt-2">1. Nature of Advice</h3>
               <p>
